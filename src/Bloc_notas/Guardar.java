@@ -9,10 +9,11 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class Guardar extends javax.swing.JFrame {
-
+//JfileChooser sirve para 
     JFileChooser seleccionar = new JFileChooser ();
     File archivo;
     FileInputStream entrada;
+    //OutputStream sirve para escribir
     FileOutputStream salida;
     
     public Guardar() {
@@ -22,6 +23,7 @@ public class Guardar extends javax.swing.JFrame {
     public String AbrirArchivo(File archivo){
         String documentos="";
         try {
+            //FileInputStream sirve para leer
             entrada = new FileInputStream(archivo);
             int ascci;
             while((ascci=entrada.read())!=-1){
@@ -32,11 +34,12 @@ public class Guardar extends javax.swing.JFrame {
         } catch (Exception e) {
         }return documentos;
     }
-    
+    //Metodo para guardar archivo
     public String GuardarArchivo(File archivo, String documentos){
         String mensaje=null;
         try {
             salida= new FileOutputStream(archivo);
+            //getbytes sirve para convertir valores entre matrices de bytes
             byte[] bytxt=documentos.getBytes();
             salida.write(bytxt);
             mensaje="SE GUARDO CARA DE VERGA";
@@ -134,6 +137,7 @@ public class Guardar extends javax.swing.JFrame {
         if (seleccionar.showDialog(null, "abrir")==JFileChooser.APPROVE_OPTION) {
             archivo=seleccionar.getSelectedFile();
             if(archivo.canRead()){
+                //endsWith  sirve para verificar si la cadena termina con la subcadena especificada por el ususario
                 if(archivo.getName().endsWith("txt")){
                     String documentos=AbrirArchivo(archivo);
                     TextArea.setText(documentos);
@@ -145,6 +149,7 @@ public class Guardar extends javax.swing.JFrame {
     private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
         if (seleccionar.showDialog(null, "Guardar")==JFileChooser.APPROVE_OPTION){
             archivo=seleccionar.getSelectedFile();
+            //Condicional para ponerle el formato al documento guardado
             if (archivo.getName().endsWith("txt")) {
                 String Documentos=TextArea.getText();
                 String mensaje=GuardarArchivo(archivo, Documentos);
